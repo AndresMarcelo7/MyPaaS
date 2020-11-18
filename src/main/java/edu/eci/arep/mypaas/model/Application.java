@@ -36,14 +36,17 @@ public class Application {
 
     private void execDockerCompose() throws IOException {
             boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-            if (isWindows) {
+
+            /*if (isWindows) {
                 System.out.println("no uses windows crack");
                 Process process = Runtime.getRuntime().exec("docker-compose up -d");
                 printResults(process);
 
             } else {
-                Runtime.getRuntime().exec("docker-compose up -d");
-            }
+                Runtime.getRuntime().exec("sudo docker-compose up -d");
+            }*/
+            Process process =Runtime.getRuntime().exec("sudo docker-compose up -d");
+            printResults(process);
 
     }
 
