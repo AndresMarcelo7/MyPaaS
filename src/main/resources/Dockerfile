@@ -13,8 +13,6 @@ RUN git clone $GIT_REPO
 
 WORKDIR $GIT_REPO_LAST_PATH
 
-RUN mvn compile
-
 RUN mvn clean package
 
 CMD java -cp target/classes:target/dependency/* $MAIN_CLASS
