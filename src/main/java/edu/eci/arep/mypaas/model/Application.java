@@ -18,19 +18,21 @@ public class Application {
     private String url;
     private String port;
     private boolean flag = false;
+    private String serverUrl;
 
-    public Application(String appName, String gitRepo, String mainClass,String port) {
+    public Application(String appName, String gitRepo, String mainClass,String port,String serverUrl) {
         AppName = appName;
         this.gitRepo = gitRepo;
         this.mainClass = mainClass;
         this.port = port;
+        this.serverUrl = serverUrl;
     }
 
     public void deployApp(String port) throws IOException, InterruptedException {
         setPort(port);
+        setUrl(getServerUrl()+":"+getPort()+"/");
         UpdateFile.addServices(getGitRepo(),getMainClass(),getAppName(),getPort());
         createDirectory();
-        Thread.sleep(5000);
         execDockerCompose();
     }
 
@@ -113,6 +115,14 @@ public class Application {
         this.port = port;
     }
 
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
     @Override
     public String toString() {
         return "Application{" +
@@ -120,6 +130,9 @@ public class Application {
                 ", gitRepo='" + gitRepo + '\'' +
                 ", mainClass='" + mainClass + '\'' +
                 ", url='" + url + '\'' +
+                ", port='" + port + '\'' +
+                ", flag=" + flag +
+                ", serverUrl='" + serverUrl + '\'' +
                 '}';
     }
 }
